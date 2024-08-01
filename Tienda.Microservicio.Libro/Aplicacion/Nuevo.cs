@@ -13,6 +13,8 @@ namespace Tienda.Microservicio.Libro.Aplicacion
             public string Titulo { get; set; }
             public DateTime? FechaPublicacion { get; set; }
             public Guid? AutorLibro { get; set; }
+            public String Genero { get; set; }
+            public double Precio { get; set; }
         }
 
         public class EjecutaValidation : AbstractValidator<Ejecuta>
@@ -22,6 +24,8 @@ namespace Tienda.Microservicio.Libro.Aplicacion
                 RuleFor(x => x.Titulo).NotEmpty();
                 RuleFor(x => x.FechaPublicacion).NotEmpty();
                 RuleFor(x => x.AutorLibro).NotEmpty();
+                RuleFor(x => x.Genero).NotEmpty();
+                RuleFor(x => x.Precio).NotEmpty();
             }
 
             public class Manejador : IRequestHandler<Ejecuta>
@@ -40,6 +44,8 @@ namespace Tienda.Microservicio.Libro.Aplicacion
                         Titulo = request.Titulo,
                         FechaPublicacion = request.FechaPublicacion?.ToUniversalTime(),
                         AutorLibro = request.AutorLibro,
+                        Genero = request.Genero,
+                        Precio = request.Precio,
                     };
 
                     _contexto.LibreriaMaterial.Add(libro);
